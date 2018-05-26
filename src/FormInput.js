@@ -11,7 +11,7 @@ const FormInput = (props) => (
             value={props.content}
             onChange={props.controlFunction}
             placeholder={props.placeholder}/>
-            <span class="error">test</span>
+        <div className={props.showError}>{props.errorMessage}</div>
     </div>
 )
 

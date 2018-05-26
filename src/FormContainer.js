@@ -87,7 +87,6 @@ class FormContainer extends Component {
         return !isDisabled;
     }
 
-
     render() {
         const errors = this.validated(this.state.businessName, this.state.businessEmail, this.state.userName, this.state.password);
         const shouldMarkError = (field) => {
@@ -95,6 +94,7 @@ class FormContainer extends Component {
             const shouldShow = this.state.touched[field];
             return hasErrors ? shouldShow : false;
         }
+        const isDisabled = Object.keys(errors).some(x => errors[x]);
         return (
             <div className='form-container'>
                 <img className="logo" src="https://www.simplr.ai/hubfs/Simplr-December2017/Image/logo.svg?t=1526032621612" alt="Simplr" />
@@ -110,6 +110,8 @@ class FormContainer extends Component {
                         controlFunction={this.handleBusinessName}
                         content={this.state.businessName}
                         placeholder={'Enter Business Name'}
+                        showError={shouldMarkError('businessName') ? "show-error" : "hide-error"}
+                        errorMessage={"Please input business name."}
                     />
                     <FormInput
                         className={shouldMarkError('businessEmail') ? "form-control error" : "form-control"}
@@ -120,6 +122,8 @@ class FormContainer extends Component {
                         controlFunction={this.handleBusinessEmail}
                         content={this.state.businessEmail}
                         placeholder={'Enter Business Email'}
+                        showError={shouldMarkError('businessEmail') ? "show-error" : "hide-error"}
+                        errorMessage={"Please enter a valid email address."}
                     />
                     <FormInput
                         className={shouldMarkError('userName') ? "form-control error" : "form-control"}
@@ -130,16 +134,20 @@ class FormContainer extends Component {
                         controlFunction={this.handleUsername}
                         content={this.state.userName}
                         placeholder={'Username'}
+                        showError={shouldMarkError('userName') ? "show-error" : "hide-error"}
+                        errorMessage={"Please enter your desired username."}
                     />
                     <FormInput
                         className={shouldMarkError('password') ? "form-control error" : "form-control"}
                         onBlur={this.handleBlur('password')}
-                        inputType={'text'}
+                        inputType={'password'}
                         title={'Password'}
                         name={'Password'}
                         controlFunction={this.handlePassword}
                         content={this.state.password}
                         placeholder={'Password'}
+                        showError={shouldMarkError('password') ? "show-error" : "hide-error"}
+                        errorMessage={"Password should have six characters."}
                     />
                     <FormInput
                         className={'form-control website'}
@@ -182,7 +190,7 @@ class FormContainer extends Component {
                         href={'https://www.simplr.ai/hubfs/privacyPolicyv4.pdf'}
                     />
                     <div className="btn-container">
-                        <button type="submit" className="btn btn-submit">REGISTER</button>
+                        <button disabled={isDisabled} type="submit" className="btn btn-submit">REGISTER</button>
                     </div>
                 </form>
             </div>
