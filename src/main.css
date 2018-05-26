@@ -203,9 +203,10 @@ div.dropdown-menu.dropdown-menu-right.show{
 .conditions{
     display:block;
 }
-/* .selection-title{
-    display
-} */
+
+form input.error {
+    border-color: red;
+  }
 .React__checkbox--input {
     display: none;
   }
