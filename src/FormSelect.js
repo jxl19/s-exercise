@@ -1,0 +1,22 @@
+import React from 'react';
+
+const FormSelect = (props) => (
+
+    <div className="btn-group dropup">
+        <div className="selection-title">{props.selectionTitle}</div>
+        <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span className="default-option">{props.selectedOption}</span>
+</button>
+        <div className="dropdown-menu dropdown-menu-right">
+            {props.options.map(opt => {
+                return (
+                    <button onClick={props.controlFunction} className="dropdown-item"
+                        type={"button"}
+                        key={opt}
+                        value={opt}>{opt}</button>
+                );
+            })}
+        </div>
+    </div>
+)
+export default FormSelect;
