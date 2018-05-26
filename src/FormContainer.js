@@ -15,7 +15,11 @@ class FormContainer extends Component {
             businessSelection: ['type1', 'type2', 'type3'],
             businessSelected: 'Select your business',
             termsChecked: false,
-            privacyChecked: false
+            privacyChecked: false,
+            touched: {
+                email: false,
+                password: false
+            }
         }
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleBusinessName = this.handleBusinessName.bind(this);
@@ -63,14 +67,43 @@ class FormContainer extends Component {
         console.log(e.target.value);
         this.setState({ businessSelected: e.target.value })
     }
+    handleBlur = (field) => (evt) => {
+        console.log('hey')
+        this.setState({
+            touched: { ...this.state.touched, [field]: true },
+        });
+    }
+    validated = (businessName, businessEmail, userName, password) => {
+        return {
+            businessName: businessName.length === 0,
+            businessEmail: businessEmail.length === 0,
+            userName: userName.length === 0,
+            password: password.length === 0
+        }
+    }
+    canBeSubmitted() {
+        const errors = this.validated(this.state.businessName, this.state.businessEmail, this.state.userName, this.state.password);
+        const isDisabled = Object.keys(errors).some(x => errors[x]);
+        return !isDisabled;
+    }
+
+
     render() {
+        const errors = this.validated(this.state.businessName, this.state.businessEmail, this.state.userName, this.state.password);
+        const shouldMarkError = (field) => {
+            const hasErrors = errors[field];
+            const shouldShow = this.state.touched[field];
+            return hasErrors ? shouldShow : false;
+        }
         return (
             <div className='form-container'>
                 <img className="logo" src="https://www.simplr.ai/hubfs/Simplr-December2017/Image/logo.svg?t=1526032621612" alt="Simplr" />
                 <h2 className="heading">LET'S GET STARTED</h2>
                 <form onSubmit={this.handleFormSubmit}>
+                    {/* class name is a function that returns error as a class if there is error */}
                     <FormInput
-                        className={'business-name-input'}
+                        className={shouldMarkError('businessName') ? "form-control error" : "form-control"}
+                        onBlur={this.handleBlur('businessName')}
                         inputType={'text'}
                         title={'Business Name'}
                         name={'businessName'}
@@ -79,7 +112,8 @@ class FormContainer extends Component {
                         placeholder={'Enter Business Name'}
                     />
                     <FormInput
-                        className={'business-email-input'}
+                        className={shouldMarkError('businessEmail') ? "form-control error" : "form-control"}
+                        onBlur={this.handleBlur('businessEmail')}
                         inputType={'text'}
                         title={'Business Email'}
                         name={'businessEmail'}
@@ -88,7 +122,8 @@ class FormContainer extends Component {
                         placeholder={'Enter Business Email'}
                     />
                     <FormInput
-                        className={'username-input'}
+                        className={shouldMarkError('userName') ? "form-control error" : "form-control"}
+                        onBlur={this.handleBlur('userName')}
                         inputType={'text'}
                         title={'Username'}
                         name={'Username'}
@@ -97,7 +132,8 @@ class FormContainer extends Component {
                         placeholder={'Username'}
                     />
                     <FormInput
-                        className={'password-input'}
+                        className={shouldMarkError('password') ? "form-control error" : "form-control"}
+                        onBlur={this.handleBlur('password')}
                         inputType={'text'}
                         title={'Password'}
                         name={'Password'}
@@ -106,7 +142,7 @@ class FormContainer extends Component {
                         placeholder={'Password'}
                     />
                     <FormInput
-                        className={'website'}
+                        className={'form-control website'}
                         inputType={'text'}
                         title={'Website'}
                         name={'website'}
