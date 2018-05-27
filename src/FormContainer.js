@@ -38,62 +38,63 @@ class FormContainer extends Component {
             businessEmail: this.state.businessEmail,
             userName: this.state.userName,
             password: this.state.password,
-            website: this.state.website
+            website: this.state.website,
+            businessSelected:  this.state.businessSelected,
+            privacyChecked: this.state.privacyChecked,
+            termsChecked: this.state.termsChecked
         }
-        console.log('to be sent as POST req', payload)
+        console.log('payload to be sent as a POST request', payload);
     }
-    handleBusinessName(e) {
-        this.setState({ businessName: e.target.value }, () => console.log('name', this.state.businessName))
+    handleBusinessName = (e) => {
+        this.setState({ businessName: e.target.value })
     }
-    handleBusinessEmail(e) {
+    handleBusinessEmail = (e) =>  {
         this.setState({ businessEmail: e.target.value })
     }
-    handleUsername(e) {
+    handleUsername = (e) => {
         this.setState({ userName: e.target.value })
     }
-    handlePassword(e) {
+    handlePassword = (e) => {
         this.setState({ password: e.target.value })
     }
-    handleWebsite(e) {
+    handleWebsite = (e) => {
         this.setState({ website: e.target.value })
     }
-    handleCheckTerms(e) {
+    handleCheckTerms = (e) => {
         this.setState({ termsChecked: e.target.checked })
     }
-    handleCheckPrivacy(e) {
+    handleCheckPrivacy = (e) => {
         this.setState({ privacyChecked: e.target.checked })
     }
-    handleSelect(e) {
-        console.log(e.target.value);
+    handleSelect = (e) => {
         this.setState({ businessSelected: e.target.value })
     }
-    handleBlur = (field) => (evt) => {
-        console.log('hey')
+    handleBlur = (field) => (e) => {
         this.setState({
             touched: { ...this.state.touched, [field]: true },
         });
     }
-    validated = (businessName, businessEmail, userName, password) => {
+    validated = (businessName, businessEmail, userName, password, privacyChecked, termsChecked) => {
         return {
             businessName: businessName.length === 0,
             businessEmail: businessEmail.length === 0,
             userName: userName.length === 0,
-            password: password.length === 0
+            password: password.length === 0,
+            privacyChecked: !this.state.privacyChecked,
+            termsChecked: !this.state.termsChecked
         }
-    }
-    canBeSubmitted() {
-        const errors = this.validated(this.state.businessName, this.state.businessEmail, this.state.userName, this.state.password);
-        const isDisabled = Object.keys(errors).some(x => errors[x]);
-        return !isDisabled;
     }
 
     render() {
-        const errors = this.validated(this.state.businessName, this.state.businessEmail, this.state.userName, this.state.password);
+        //setting the parameters for errors
+        const errors = this.validated(this.state.businessName, this.state.businessEmail, this.state.userName, this.state.password, this.state.privacyChecked, this.state.termsChecked);
+        //marks errors based on errors const above, returns error if there is error to show error field
         const shouldMarkError = (field) => {
             const hasErrors = errors[field];
             const shouldShow = this.state.touched[field];
             return hasErrors ? shouldShow : false;
         }
+        //disables button if there are any errors defined above
         const isDisabled = Object.keys(errors).some(x => errors[x]);
         return (
             <div className='form-container'>
@@ -143,6 +144,7 @@ class FormContainer extends Component {
                         inputType={'password'}
                         title={'Password'}
                         name={'Password'}
+                        condition={'6 characters | 1 uppercase | 1 lowercase | 1 digit'}
                         controlFunction={this.handlePassword}
                         content={this.state.password}
                         placeholder={'Password'}
@@ -154,6 +156,7 @@ class FormContainer extends Component {
                         inputType={'text'}
                         title={'Website'}
                         name={'website'}
+                        condition={'(Optional)'}
                         controlFunction={this.handleWebsite}
                         content={this.state.website}
                         placeholder={'Website'}
@@ -169,11 +172,9 @@ class FormContainer extends Component {
                         className={'terms'}
                         name={'Terms of Service'}
                         type={'drop-up'}
-                        for={'cb1'}
-                        id={'cb1'}
                         title={'I have read and I do accept '}
                         link={'terms of services'}
-                        controlFunction={this.handleCheckTerms}
+                        handleChange={this.handleCheckTerms}
                         checked={this.state.termsChecked}
                         href={'https://cdn2.hubspot.net/hubfs/3974729/Documents/SIMPLR%20%20TOS%20.pdf?t=1527102428034'}
                     />
@@ -181,11 +182,9 @@ class FormContainer extends Component {
                         className={'privacy'}
                         name={'Privacy Policy'}
                         type={'drop-up'}
-                        for={'cb2'}
-                        id={'cb2'}
                         title={'I have read and I do accept '}
                         link={'privacy policy'}
-                        controlFunction={this.handleCheckPrivacy}
+                        handleChange={this.handleCheckPrivacy}
                         checked={this.state.privacyChecked}
                         href={'https://www.simplr.ai/hubfs/privacyPolicyv4.pdf'}
                     />
