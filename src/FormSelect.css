@@ -1,0 +1,68 @@
+.btn-group, .dropdown-toggle{
+    width:100%;
+    background-color: white !important;
+    color: black !important;
+}
+
+.dropup .dropdown-toggle::after{
+    font-size:25px;
+    float: right;
+    margin-top: 8px;
+    color: #707070;
+    vertical-align: 0.1em !important;
+}
+
+.dropup {
+    width: 100%;
+    margin-bottom: 20px;
+    display:block !important;
+}
+
+.dropup > button{
+    border-radius: 0px;
+}
+
+.dropdown-toggle {
+    width: 10%;
+    border-left: none;
+    text-align: center;
+}
+
+.default-option{
+    float:left;
+    color: #8d8282e6;
+}
+
+.selected-option{
+    float:left;
+    color: black;
+}
+
+div.dropdown-menu.dropdown-menu-right.show{
+    width:100%;
+    border-radius: 0;
+    transform: translate3d(0px, -89px, 0px) !important;
+
+}
+
+.btn-secondary {
+    width: 100%;
+    background-color: white;
+    border: 1px solid gainsboro;
+    color: grey;
+    text-align: left;
+}
+
+label{
+    margin-bottom: 0 !important;
+    font-size:14px;
+}
+
+label.conditions {
+    cursor: pointer;
+    color: #8d8282e6;
+}
+
+.btn-secondary.focus, .btn-secondary:focus{
+    box-shadow: 0 0 0 0.1rem rgba(0,123,255,.25) !important;
+}

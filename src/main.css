@@ -29,53 +29,6 @@ h2.heading {
     margin-bottom: 15px;
 }
 
-h6, label{
-    margin-bottom: 0;
-}
-.checkbox label{
-    display:inline-flex;
-}
-.form-group input {
-    background-color: #dcdcdc52;
-    border-radius: 0px;
-}
-
-label{
-    font-size: 14px;
-}
-.cond-input{
-    margin-left: 5px;
-    font-size: 12px;
-}
-.condition{
-    margin-left: 5px;
-    color: #8d8282e6;
-    font-size:12px;
-}
-.dropup {
-    width: 100%;
-    margin-bottom: 20px;
-    display:block !important;
-}
-
-.dropup > button{
-    border-radius: 0px;
-}
-
-.btn-secondary {
-    width: 90%;
-    background-color: white;
-    border: 1px solid gainsboro;
-    color: grey;
-    text-align: left;
-}
-
-.dropdown-toggle {
-    width: 10%;
-    border-left: none;
-    text-align: center;
-}
-
 .btn-container{
     margin: 65px auto 40px;
     text-align: center;
@@ -89,64 +42,6 @@ button.btn.btn-submit {
     background-color: #22b6e3;
     border: #22b6e3;
     color: white;
-}
-
-.custom-control-label::before, 
-.custom-control-label::after {
-    top: .8rem;
-    width: 1.25rem;
-    height: 1.25rem;
-}
-.custom-control-label:checked + .custom-control-label:before{
-    color: white;
-}
-/* hide browser default checkbox */
-input[type="checkbox"] {
-  /* visibility: hidden; */
-  float: left;
-}
-label.conditions {
-  cursor: pointer;
-  color: #8d8282e6;
-}
-/* custom checkbox */
-input[type="checkbox"] + label:before {
-  border: 1px solid #333;
-  content: "\00a0";
-  display: inline-block;
-  font: 16px/1em sans-serif;
-  height: 16px;
-  margin: 0 .25em 0 0;
-  padding: 0;
-  width: 16px;
-}
-input[type="checkbox"]:checked + label:before {
-  background: black;
-  color: white;
-  content: "\2713";
-  text-align: center;
-}
-input[type="checkbox"]:checked + label:after {
-  font-weight: bold;
-}
-
-input[type="checkbox"]:focus + label::before {
-    outline: rgb(59, 153, 252) auto 5px;
-}
-
-.terms, .privacy{
-    font-weight: bold;
-}
-
-.terms a, .privacy a{
-    color: #3f9fc6 !important;
-    text-decoration: underline !important;
-    cursor: pointer;
-}
-
-.default-option{
-    float:left;
-    color: #8d8282e6;
 }
 
 @media only screen and (max-width: 665px)  {
@@ -167,95 +62,12 @@ input[type="checkbox"]:focus + label::before {
     }
 } 
 
-@media (max-device-width: 330px) {
-    .cond-input{
-        font-size:10px;
-    }
-}
+
 
 @media(min-device-width: 768px) and (max-device-width: 768px) {
     .form-container{
         margin: 95px auto;
     }
 }
-/* 
-@media(min-device-width: 1024px) {
-    .form-container{
-        margin: 30% auto;
-    }
-} */
 
-.btn-group, .dropdown-toggle{
-    width:100%;
-    background-color: white !important;
-    color: black !important;
-}
-div.dropdown-menu.dropdown-menu-right.show{
-    width:100%;
-    border-radius: 0;
-    transform: translate3d(0px, -89px, 0px) !important;
 
-}
-.dropup .dropdown-toggle::after{
-    font-size:25px;
-    float: right;
-    margin-top: 8px;
-    color: #707070;
-    vertical-align: 0.1em !important;
-}
-
-.btn-secondary.focus, .btn-secondary:focus{
-    box-shadow: 0 0 0 0.1rem rgba(0,123,255,.25) !important;
-}
-
-.btn.focus, .btn:focus{
-    box-shadow: 0 0 0 0.1rem rgba(0,123,255,.25) !important;
-}
-.privacy, .terms{
-    float:right;
-    margin-top:6px;
-    color:#8d8282e6;
-    font-weight: 400;
-}
-.conditions{
-    display:block;
-}
-.hide-error{
-    display:none;
-}
-.show-error{
-    color:red;
-    display: inline;
-    font-size:12px;
-}
-form input.error {
-    border-color: red;
-  }
-.checkbox-input {
-    display: none;
-  }
-  .checkbox-input + span {
-    display: inline-flex;
-    width: 21px;
-    height: 20px;
-    background: white;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    margin: 5px;
-    border: 1px solid black;
-    box-sizing: border-box;
-    transition: all 150ms;
-  }
-  .checkbox-input:checked + span::before {
-    content: '\2713';
-    text-align: center;
-    font-size: 14px;
-    color: white;
-    background: #5a5a5a;
-    width: 20px;
-    height:20px;
-  }
-  .form-group label{
-      margin-bottom: 0;
-  }

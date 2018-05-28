@@ -1,0 +1,27 @@
+.form-group input {
+    background-color: #dcdcdc52;
+    border-radius: 0px;
+}
+.form-condition{
+    margin-left: 5px;
+    color: #8d8282e6;
+    font-size:12px;
+}
+form input.error {
+    border-color: red;
+  }
+
+.hide-error{
+    display:none;
+}
+.show-error{
+    color:red;
+    display: inline;
+    font-size:12px;
+}
+
+@media (max-device-width: 330px) {
+    .form-condition{
+        font-size:10px;
+    }
+}
