@@ -1,8 +1,8 @@
 import React from 'react'; 
-
+import './FormInput.css';
 const FormInput = (props) => (
     <div className="form-group">
-        <label htmlFor="form-label">{props.title}<span className="condition">{props.condition}</span></label>
+        <label htmlFor="form-label">{props.title}<span className="form-condition">{props.condition}</span></label>
         <input 
             className={props.className}
             onBlur={props.onBlur}
