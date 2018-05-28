@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import FormContainer from './FormContainer';
-// import './App.css';
 import './main.css';
 
 class App extends Component {
