@@ -14,6 +14,7 @@ class FormContainer extends Component {
             website: '',
             businessSelection: ['type1', 'type2', 'type3'],
             businessSelected: 'Select your business',
+            selectedOption: '',
             termsChecked: false,
             privacyChecked: false,
             touched: {
@@ -68,6 +69,7 @@ class FormContainer extends Component {
     }
     handleSelect = (e) => {
         this.setState({ businessSelected: e.target.value })
+        this.setState({selectedOption : e.target.value})
     }
     handleBlur = (field) => (e) => {
         this.setState({
@@ -161,18 +163,21 @@ class FormContainer extends Component {
                         content={this.state.website}
                         placeholder={'Website'}
                     />
+                    {/* businessselected should be namechanged to default opt */}
                     <FormSelect
                         name={'businessOptions'}
-                        selectedOption={this.state.businessSelected}
+                        className={this.state.selectedOption ? 'selected-option' : 'default-option'}
+                        placeholder={this.state.businessSelected}
+                        optionSelect={this.state.selectedOption}
                         controlFunction={this.handleSelect}
                         options={this.state.businessSelection}
                         selectionTitle={'Type of Business'}
                     />
                     <FormCheckBox
                         className={'terms'}
-                        name={'Terms of Service'}
+                        title={'Terms of Service'}
                         type={'drop-up'}
-                        title={'I have read and I do accept '}
+                        content={'I have read and I do accept '}
                         link={'terms of services'}
                         handleChange={this.handleCheckTerms}
                         checked={this.state.termsChecked}
@@ -180,9 +185,9 @@ class FormContainer extends Component {
                     />
                     <FormCheckBox
                         className={'privacy'}
-                        name={'Privacy Policy'}
+                        title={'Privacy Policy'}
                         type={'drop-up'}
-                        title={'I have read and I do accept '}
+                        content={'I have read and I do accept '}
                         link={'privacy policy'}
                         handleChange={this.handleCheckPrivacy}
                         checked={this.state.privacyChecked}
