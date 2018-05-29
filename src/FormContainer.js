@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import FormInput from './FormInput';
-import FormCheckBox from './FormCheckbox';
+import FormCheckBox from './FormCheckBox';
 import FormSelect from './FormSelect';
+import './FormContainer.css';
 
 class FormContainer extends Component {
     constructor(props) {
@@ -13,7 +14,6 @@ class FormContainer extends Component {
             password: '',
             website: '',
             businessSelection: ['type1', 'type2', 'type3'],
-            businessSelected: 'Select your business',
             selectedOption: '',
             termsChecked: false,
             privacyChecked: false,
@@ -40,7 +40,7 @@ class FormContainer extends Component {
             userName: this.state.userName,
             password: this.state.password,
             website: this.state.website,
-            businessSelected:  this.state.businessSelected,
+            selectedOption:  this.state.selectedOption,
             privacyChecked: this.state.privacyChecked,
             termsChecked: this.state.termsChecked
         }
@@ -68,20 +68,21 @@ class FormContainer extends Component {
         this.setState({ privacyChecked: e.target.checked })
     }
     handleSelect = (e) => {
-        this.setState({ businessSelected: e.target.value })
-        this.setState({selectedOption : e.target.value})
+        this.setState({ selectedOption : e.target.value})
     }
+    //checking to see if a input field has been passed
     handleBlur = (field) => (e) => {
         this.setState({
             touched: { ...this.state.touched, [field]: true },
         });
     }
+    //checks if any of these returns true(error)
     validated = (businessName, businessEmail, userName, password, privacyChecked, termsChecked) => {
         return {
             businessName: businessName.length === 0,
             businessEmail: businessEmail.length === 0,
             userName: userName.length === 0,
-            password: password.length === 0,
+            password: password.length < 6,
             privacyChecked: !this.state.privacyChecked,
             termsChecked: !this.state.termsChecked
         }
@@ -90,11 +91,9 @@ class FormContainer extends Component {
     render() {
         //setting the parameters for errors
         const errors = this.validated(this.state.businessName, this.state.businessEmail, this.state.userName, this.state.password, this.state.privacyChecked, this.state.termsChecked);
-        //marks errors based on errors const above, returns error if there is error to show error field
+        //if there are errors and has been 'touched', return err
         const shouldMarkError = (field) => {
-            const hasErrors = errors[field];
-            const shouldShow = this.state.touched[field];
-            return hasErrors ? shouldShow : false;
+            return errors[field] && this.state.touched[field];
         }
         //disables button if there are any errors defined above
         const isDisabled = Object.keys(errors).some(x => errors[x]);
@@ -103,7 +102,6 @@ class FormContainer extends Component {
                 <img className="logo" src="https://www.simplr.ai/hubfs/Simplr-December2017/Image/logo.svg?t=1526032621612" alt="Simplr" />
                 <h2 className="heading">LET'S GET STARTED</h2>
                 <form onSubmit={this.handleFormSubmit}>
-                    {/* class name is a function that returns error as a class if there is error */}
                     <FormInput
                         className={shouldMarkError('businessName') ? "form-control error" : "form-control"}
                         onBlur={this.handleBlur('businessName')}
@@ -119,7 +117,7 @@ class FormContainer extends Component {
                     <FormInput
                         className={shouldMarkError('businessEmail') ? "form-control error" : "form-control"}
                         onBlur={this.handleBlur('businessEmail')}
-                        inputType={'text'}
+                        inputType={'email'}
                         title={'Business Email'}
                         name={'businessEmail'}
                         controlFunction={this.handleBusinessEmail}
@@ -163,11 +161,10 @@ class FormContainer extends Component {
                         content={this.state.website}
                         placeholder={'Website'}
                     />
-                    {/* businessselected should be namechanged to default opt */}
                     <FormSelect
                         name={'businessOptions'}
                         className={this.state.selectedOption ? 'selected-option' : 'default-option'}
-                        placeholder={this.state.businessSelected}
+                        placeholder={'Select your business'}
                         optionSelect={this.state.selectedOption}
                         controlFunction={this.handleSelect}
                         options={this.state.businessSelection}

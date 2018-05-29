@@ -1,5 +1,5 @@
 import React from 'react';
-import './FormCheckbox.css';
+import './FormCheckBox.css';
 const FormCheckBox = (props) => (
 
   <div className="checkbox">

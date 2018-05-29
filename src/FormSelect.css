@@ -64,5 +64,5 @@ label.conditions {
 }
 
 .btn-secondary.focus, .btn-secondary:focus{
-    box-shadow: 0 0 0 0.1rem rgba(0,123,255,.25) !important;
+    box-shadow: 0 0 0 0.1rem rgba(0,123,255,.20) !important;
 }
